@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
-This script starts a Flask web application with multiple routes.
-The application listens on 0.0.0.0, port 5000.
+This script starts a Flask web application with multiple routes
+including dynamic URL handling. The application listens on
+0.0.0.0, port 5000.
 """
 from flask import Flask
 
@@ -34,10 +35,16 @@ def c_text(text):
 def python_text(text):
     """
     Display 'Python ', followed by the value of the text variable
-    (default 'is cool'), underscores replaced with spaces.
+    or the default 'is cool', underscores replaced with spaces.
     """
     return 'Python ' + text.replace('_', ' ')
 
 
+@app.route('/number/<int:n>', strict_slashes=False)
+def number_n(n):
+    """ Display 'n is a number' only if n is an integer. """
+    return f"{n} is a number"
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
